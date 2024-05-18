@@ -13,12 +13,14 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
       - name: Run app
-        run: python3 ./src/app/app.py &
+        run: python3 ./src/app/app.py & # Запускаем приложение в фоновом режиме
       - name: Test GET-request
         run: |
-          ANSW=$(curl http://127.0.0.1:5000/)
+          sleep 10 # Добавляем задержку для полной инициализации сервера
+          ANSW=$(curl http://127.0.0.1:5001/)
           if [ "$ANSW" != "Hello, World!" ]; then
-          exit 1
+            echo "Integration Test FAIL: Response was '$ANSW'"
+            exit 1
           else
-          echo "Integration Test PASS"
+            echo "Integration Test PASS"
           fi
