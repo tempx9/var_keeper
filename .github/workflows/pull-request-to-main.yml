@@ -27,7 +27,7 @@ jobs:
         run: python3 ./src/app/app.py &
       - name: Test GET-request
         run: |
-          ANSW=$(curl http://127.0.0.1:5000/)
+          ANSW=$(curl http://127.0.0.1:5002/)
           if [ "$ANSW" != "Hello, World!" ]; then
           exit 1
           else
